@@ -3,6 +3,8 @@ import torch.nn as nn
 from models import wideresnet
 import models
 from models import wideresnet_yopo
+from models.preact_resnet import PreActResNet18
+
 im_sz = 32
 n_ch = 3
 
@@ -12,7 +14,9 @@ class F(nn.Module):
         super(F, self).__init__()
         # default, wrn
         self.norm = norm
-        if model == 'yopo':
+        if model == 'preact':
+            self.f = PreActResNet18()
+        elif model == 'yopo':
             self.f = wideresnet_yopo.Wide_ResNet(depth, width, norm=norm, dropout_rate=dropout_rate)
         else:
             self.f = wideresnet.Wide_ResNet(depth, width, norm=norm, dropout_rate=dropout_rate)
@@ -57,6 +61,7 @@ def init_random(args, bs):
 
 def get_model_and_buffer(args, device):
     model_cls = F if args.uncond else CCF
+
     f = model_cls(args.depth, args.width, args.norm, dropout_rate=args.dropout_rate, n_classes=args.n_classes, model=args.model)
     if not args.uncond:
         assert args.buffer_size % args.n_classes == 0, "Buffer size must be divisible by args.n_classes"
