@@ -566,8 +566,12 @@ def main(args):
 
     # load em up
     ckpt_dict = t.load(args.load_path)
-    f.load_state_dict(ckpt_dict["model_state_dict"])
-    replay_buffer = ckpt_dict["replay_buffer"]
+    if args.fresh_samples:
+        f.f.load_state_dict(ckpt_dict)
+        replay_buffer = uncond_samples(f, args, device)
+    else:
+        f.load_state_dict(ckpt_dict["model_state_dict"])
+        replay_buffer = ckpt_dict["replay_buffer"]
 
     f = f.to(device)
     f.eval()
