@@ -565,10 +565,10 @@ def main(args):
     print(f"loading model from {args.load_path}")
 
     # load em up
-    # ckpt_dict = t.load(args.load_path)
+    ckpt_dict = t.load(args.load_path)
     # f.load_state_dict(ckpt_dict["model_state_dict"])
     # replay_buffer = ckpt_dict["replay_buffer"]
-    f.f.load_state_dict(args.load_path)
+    f.f.load_state_dict(ckpt_dict)
 
     f = f.to(device)
     f.eval()
