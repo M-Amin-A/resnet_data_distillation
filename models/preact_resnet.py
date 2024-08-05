@@ -70,7 +70,6 @@ class PreActResNet(nn.Module):
         self.layer_one_out = None
 
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
-        self.layer_one = self.conv1
 
         self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1)
         self.layer2 = self._make_layer(block, 128, num_blocks[1], stride=2)
@@ -103,6 +102,9 @@ class PreActResNet(nn.Module):
         out = out.view(out.size(0), -1)
         # out = self.linear(out)
         return out
+
+    def get_layer_one(self):
+        return self.conv1
 
 
 def PreActResNet18():

@@ -121,3 +121,6 @@ class Wide_ResNet(nn.Module):
             out = F.avg_pool2d(out, 8)
         out = out.view(out.size(0), -1)
         return out
+
+    def get_layer_one(self):
+        return self.conv1
