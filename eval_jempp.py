@@ -566,7 +566,10 @@ def main(args):
 
     # load em up
     ckpt_dict = t.load(args.load_path, map_location=t.device('cpu'))
+    print('loaded_successfuly')
     f.f.load_state_dict(ckpt_dict)
+    print('loaded_successfuly2')
+
 
     # f.load_state_dict(ckpt_dict["model_state_dict"])
     # replay_buffer = ckpt_dict["replay_buffer"]
