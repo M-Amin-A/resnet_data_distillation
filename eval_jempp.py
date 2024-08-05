@@ -566,9 +566,8 @@ def main(args):
 
     # load em up
     ckpt_dict = t.load(args.load_path)
-    # f.load_state_dict(ckpt_dict["model_state_dict"])
-    # replay_buffer = ckpt_dict["replay_buffer"]
-    f.f.load_state_dict(ckpt_dict)
+    f.load_state_dict(ckpt_dict["model_state_dict"])
+    replay_buffer = ckpt_dict["replay_buffer"]
 
     f = f.to(device)
     f.eval()
