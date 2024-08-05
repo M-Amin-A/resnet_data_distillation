@@ -190,6 +190,8 @@ def cond_samples(f, replay_buffer, args, device, fresh=False):
     if fresh:
         replay_buffer = uncond_samples(f, args, device, save=True)
     n_it = replay_buffer.size(0) // 100
+    print(replay_buffer.size(0))
+
     all_y = []
     for i in range(n_it):
         x = replay_buffer[i * 100: (i + 1) * 100].to(device)
