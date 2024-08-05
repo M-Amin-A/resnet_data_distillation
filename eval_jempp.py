@@ -177,6 +177,10 @@ def uncond_samples(f, args, device, save=True):
         replay_buffer = init_from_centers(args)
     else:
         replay_buffer = t.FloatTensor(args.buffer_size, 3, 32, 32).uniform_(-1, 1)
+
+    print("hi")
+    print(replay_buffer.size(0))
+
     for i in range(args.n_sample_steps):
         samples = sample_q(f, replay_buffer, y=None, n_steps=args.n_steps, in_steps=args.in_steps, args=args)
         if i % args.print_every == 0 and save:
@@ -570,7 +574,7 @@ def main(args):
     ckpt_dict = t.load(args.load_path)
     if args.fresh_samples:
         f.f.load_state_dict(ckpt_dict)
-        replay_buffer = uncond_samples(f, args, device)
+        replay_buffer = None
     else:
         f.load_state_dict(ckpt_dict["model_state_dict"])
         replay_buffer = ckpt_dict["replay_buffer"]
