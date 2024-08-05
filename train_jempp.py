@@ -73,7 +73,8 @@ def sample_q(f, replay_buffer, y=None, n_steps=10, in_steps=10, args=None, save=
     init_sample, buffer_inds = sample_p_0(replay_buffer, bs=bs, y=y)
     x_k = t.autograd.Variable(init_sample, requires_grad=True)
     # sgld
-    print("here", in_steps, f.f.layer_one)
+    print(f.f)
+    print(f.f.layer_one)
     if in_steps > 0:
         Hamiltonian_func = Hamiltonian(f.f.layer_one)
 
