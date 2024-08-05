@@ -178,9 +178,6 @@ def uncond_samples(f, args, device, save=True):
     else:
         replay_buffer = t.FloatTensor(args.buffer_size, 3, 32, 32).uniform_(-1, 1)
 
-    print("hi")
-    print(replay_buffer.size(0))
-
     for i in range(args.n_sample_steps):
         samples = sample_q(f, replay_buffer, y=None, n_steps=args.n_steps, in_steps=args.in_steps, args=args)
         if i % args.print_every == 0 and save:
@@ -194,7 +191,6 @@ def cond_samples(f, replay_buffer, args, device, fresh=False):
     if fresh:
         replay_buffer = uncond_samples(f, args, device, save=True)
     n_it = replay_buffer.size(0) // 100
-    print(replay_buffer.size(0))
 
     all_y = []
     for i in range(n_it):
