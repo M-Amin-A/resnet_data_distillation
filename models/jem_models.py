@@ -16,8 +16,8 @@ class F(nn.Module):
         self.norm = norm
         if model == 'preact':
             self.f = PreActResNet18()
-        # elif model == 'yopo':
-        #     self.f = wideresnet_yopo.Wide_ResNet(depth, width, norm=norm, dropout_rate=dropout_rate)
+        elif model == 'yopo':
+            self.f = wideresnet_yopo.Wide_ResNet(depth, width, norm=norm, dropout_rate=dropout_rate)
         else:
             self.f = wideresnet.Wide_ResNet(depth, width, norm=norm, dropout_rate=dropout_rate)
         self.energy_output = nn.Linear(self.f.last_dim, 1)

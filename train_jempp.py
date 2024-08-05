@@ -75,6 +75,7 @@ def sample_q(f, replay_buffer, y=None, n_steps=10, in_steps=10, args=None, save=
     # sgld
     print(f.f)
     print(f.f.layer_one)
+    print(args.model)
     if in_steps > 0:
         Hamiltonian_func = Hamiltonian(f.f.layer_one)
 
